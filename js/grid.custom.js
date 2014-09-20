@@ -4,8 +4,8 @@
 /**
  * jqGrid extension for custom methods
  * Tony Tomov tony@trirand.com
- * http://trirand.com/blog/ 
- * 
+ * http://trirand.com/blog/
+ *
  * Wildraid wildraid@mail.ru
  * Oleg Kiriljuk oleg.kiriljuk@ok-soft-gmbh.com
  * Dual licensed under the MIT and GPL licenses:
@@ -101,7 +101,7 @@ $.jgrid.extend({
 	},
 	GridDestroy : function () {
 		return this.each(function(){
-			if ( this.grid ) { 
+			if ( this.grid ) {
 				if ( this.p.pager ) { // if not part of grid
 					$(this.p.pager).remove();
 				}
@@ -326,12 +326,12 @@ $.jgrid.extend({
 				var trow = $("tr.ui-search-toolbar",$t.grid.hDiv),
 				trow2 = $t.p.frozenColumns === true ?  $("tr.ui-search-toolbar",$t.grid.fhDiv) : false;
 				if(trow.css("display") === 'none') {
-					trow.show(); 
+					trow.show();
 					if(trow2) {
 						trow2.show();
 					}
-				} else { 
-					trow.hide(); 
+				} else {
+					trow.hide();
 					if(trow2) {
 						trow2.hide();
 					}
@@ -460,7 +460,7 @@ $.jgrid.extend({
 								sep = cm.editoptions.separator === undefined ? ":" : cm.editoptions.separator;
 								delim = cm.editoptions.delimiter === undefined ? ";" : cm.editoptions.delimiter;
 							}
-							if (oSv) {	
+							if (oSv) {
 								var elem = document.createElement("select");
 								elem.style.width = "100%";
 								$(elem).attr({name:cm.index || cm.name, id: "gs_"+cm.name});
@@ -471,6 +471,7 @@ $.jgrid.extend({
 										sv = so[k].split(sep);
 										ov = document.createElement("option");
 										ov.value = sv[0]; ov.innerHTML = sv[1];
+										ov.className = "f_" + $t.name + "_" + ov.value;
 										elem.appendChild(ov);
 									}
 								} else if(typeof oSv === "object" ) {
@@ -478,6 +479,7 @@ $.jgrid.extend({
 										if(oSv.hasOwnProperty(key)) {
 											ov = document.createElement("option");
 											ov.value = key; ov.innerHTML = oSv[key];
+											ov.className = "f_" + $t.name + "_" + ov.value;
 											elem.appendChild(ov);
 										}
 									}
@@ -773,7 +775,7 @@ $.jgrid.extend({
 			$(ts).bind('jqGridResizeStop.setGroupHeaders', function (e, nw, idx) {
 				$firstRow.find('th').eq(idx).width(nw);
 			});
-		});				
+		});
 	},
 	setFrozenColumns : function () {
 		return this.each(function() {
@@ -786,7 +788,7 @@ $.jgrid.extend({
 			}
 			if($t.p.rownumbers) { i++; }
 			if($t.p.multiselect) { i++; }
-			
+
 			// get the max index of frozen col
 			while(i<len)
 			{
@@ -856,9 +858,9 @@ $.jgrid.extend({
 				});
 				$($t).bind('jqGridResizeStop.setFrozenColumns', function (e, w, index) {
 					var rhth = $(".ui-jqgrid-htable",$t.grid.fhDiv);
-					$("th:eq("+index+")",rhth).width( w ); 
+					$("th:eq("+index+")",rhth).width( w );
 					var btd = $(".ui-jqgrid-btable",$t.grid.fbDiv);
-					$("tr:first td:eq("+index+")",btd).width( w ); 
+					$("tr:first td:eq("+index+")",btd).width( w );
 				});
 				// sorting stuff
 				$($t).bind('jqGridOnSortCol.setFrozenColumns', function (e, index, idxcol) {
@@ -876,7 +878,7 @@ $.jgrid.extend({
 						}
 					}
 				});
-				
+
 				// data stuff
 				//TODO support for setRowData
 				$("#gview_"+$.jgrid.jqID($t.p.id)).append($t.grid.fbDiv);
